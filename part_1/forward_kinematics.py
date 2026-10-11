@@ -1,12 +1,12 @@
 import numpy as np
 from scipy.spatial.transform import Rotation
 
-def forward_kinematics(q: np.ndarray[tuple[int, int], np.dtype[np.float64]]) -> tuple[Rotation, np.ndarray[tuple[int, int], np.dtype[np.float64]]]:
+def forward_kinematics(joint_angles_column_vector: np.ndarray[tuple[int, int], np.dtype[np.float64]]) -> tuple[Rotation, np.ndarray[tuple[int, int], np.dtype[np.float64]]]:
     """
     Computes the end effector position and orientation relative to the base frame for Yahboom's Dofbot manipulator
     using the product of exponentials approach
     
-    :param q: 5x1 vector of joint angles in degrees
+    :param joint_angles_column_vector: 5x1 vector of joint angles in degrees
     :return: The 3x3 rotation matrix describing the relative orientation of the end effector frame to the base frame
     (r_ {0t}) and the 3x1 vector describing the position of the end effector relative to the base, where the first
     element is the position along the base frame x-axis, the second element is the position along the base frame
@@ -27,11 +27,11 @@ def forward_kinematics(q: np.ndarray[tuple[int, int], np.dtype[np.float64]]) -> 
     l_5 = 0.05457 # servo 5 to gripper
 
     #set up the rotation matrices between subsequent frames
-    r_01 = rotz(q[0]) # rotation between base frame and 1 frame
-    r_12 = roty(-q[1]) # rotation between 1 and 2 frames
-    r_23 = roty(-q[2]) # rotation between 2 and 3 frames
-    r_34 = roty(-q[3]) # rotation between 3 and 4 frames
-    r_45 = rotx(-q[4]) # rotation between 4 and 5 frames
+    r_01 = rotz(joint_angles_column_vector[0]) # rotation between base frame and 1 frame
+    r_12 = roty(-joint_angles_column_vector[1]) # rotation between 1 and 2 frames
+    r_23 = roty(-joint_angles_column_vector[2]) # rotation between 2 and 3 frames
+    r_34 = roty(-joint_angles_column_vector[3]) # rotation between 3 and 4 frames
+    r_45 = rotx(-joint_angles_column_vector[4]) # rotation between 4 and 5 frames
     r_5t = roty(0.0) #the tool frame is defined to be the same as frame 5
 
     #set up the position vectors between subsequent frames
