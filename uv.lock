@@ -3,6 +3,12 @@ revision = 3
 requires-python = ">=3.14"
 
 [[package]]
+name = "arm-lib"
+version = "1.0.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/d9/84/6cde56619dc631668ae99d5de161ec1a354d88c77a7b13c2ace093610fa0/Arm_lib-1.0.0.tar.gz", hash = "sha256:dfe4dc6f44d7f58a3e78c30b4cac1c1c3a10fde79db30bf5f61916b1eedef557", size = 5004, upload-time = "2021-05-14T02:52:56.772Z" }
+
+[[package]]
 name = "contourpy"
 version = "1.4.0"
 source = { registry = "https://pypi.org/simple" }
@@ -366,6 +372,7 @@ name = "robotics-1"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "arm-lib" },
     { name = "matplotlib" },
     { name = "numpy" },
     { name = "scipy" },
@@ -373,6 +380,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "arm-lib", specifier = ">=1.0.0" },
     { name = "matplotlib", specifier = ">=3.11.2" },
     { name = "numpy", specifier = ">=2.5.4" },
     { name = "scipy", specifier = ">=1.18.1" },
