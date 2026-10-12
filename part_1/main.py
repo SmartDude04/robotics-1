@@ -1,12 +1,16 @@
 import time
 
+import numpy as np
+
 from dofbot_comms import Dofbot
 from forward_kinematics import forward_kinematics
 
 def main() -> None:
     dofbot = Dofbot()
     
-    dofbot.move_joints([90, 90, 90, 90, 90, 90], 1000)
+    move_joint_angles = np.zeros(shape=(6, 1))
+    move_joint_angles[:, 0] = [90, 90, 90, 90, 90, 90]
+    dofbot.move_joints(move_joint_angles, 1000)
     
     while True:
         joint_angles = dofbot.get_joint_angles()
