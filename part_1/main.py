@@ -16,7 +16,7 @@ def main() -> None:
     move_joint_angles[:, 4] = [49, 75, 23, 27, 121, 90]
     
     for i in range(move_joint_angles.shape[1]):
-        dofbot.move_joints(move_joint_angles[:, i], 1000)
+        dofbot.move_joints(move_joint_angles[:, i:i + 1], 1000)
         time.sleep(0.5)
         
         measured_joint_angles_column_vector = dofbot.get_joint_angles()
