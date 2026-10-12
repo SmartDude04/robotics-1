@@ -52,7 +52,7 @@ def forward_kinematics(joint_angles_column_vector: np.ndarray) -> tuple[Rotation
 
     return r_0t, p_0t
 
-def rotx(theta: int | float | np.float64) -> Rotation:
+def rotx(theta: float) -> Rotation:
     """
     :param theta: Degrees to rotate
     :return: the principal axis rotation matrix for a rotation about the x-axis by theta degrees
@@ -61,7 +61,7 @@ def rotx(theta: int | float | np.float64) -> Rotation:
     r_x = Rotation.from_euler("x", theta, degrees=True)
     return r_x
 
-def roty(theta: int | float | np.float64) -> Rotation:
+def roty(theta: float) -> Rotation:
     """
     :param theta: Degrees to rotate
     :return: the principal axis rotation matrix for a rotation about the y-axis by theta degrees
@@ -70,7 +70,7 @@ def roty(theta: int | float | np.float64) -> Rotation:
     r_y = Rotation.from_euler("y", theta, degrees=True)
     return r_y
 
-def rotz(theta: int | float | np.float64) -> Rotation:
+def rotz(theta: float) -> Rotation:
     """
     :param theta: Degrees to rotate
     :return: the principal axis rotation matrix for a rotation about the z-axis by theta degrees
