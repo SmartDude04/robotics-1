@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.spatial.transform import Rotation
 
-def forward_kinematics(joint_angles_column_vector: np.ndarray[tuple[int, int], np.dtype[np.float64]]) -> tuple[Rotation, np.ndarray[tuple[int, int], np.dtype[np.float64]]]:
+def forward_kinematics(joint_angles_column_vector: np.ndarray) -> tuple[Rotation, np.ndarray]:
     """
     Computes the end effector position and orientation relative to the base frame for Yahboom's Dofbot manipulator
     using the product of exponentials approach
