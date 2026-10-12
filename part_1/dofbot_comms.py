@@ -20,4 +20,4 @@ class Dofbot:
         self.arm.Arm_serial_servo_write(joint_number + 1, angle, duration_milliseconds)
         
     def move_joints(self, joints_array, duration_milliseconds):
-        self.arm.Arm_serial_servo_write6(joints_array[0, 0], joints_array[0, 1], joints_array[0, 2], joints_array[0, 3], joints_array[0, 4], joints_array[0, 5], duration_milliseconds)
+        self.arm.Arm_serial_servo_write6(joints_array[0, 0], joints_array[1, 0], joints_array[2, 0], joints_array[3, 0], joints_array[4, 0], joints_array[5, 0], duration_milliseconds)
