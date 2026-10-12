@@ -6,6 +6,8 @@ from forward_kinematics import forward_kinematics
 def main() -> None:
     dofbot = Dofbot()
     
+    dofbot.move_joints([90, 90, 90, 90, 90, 90], 1000)
+    
     while True:
         joint_angles = dofbot.get_joint_angles()
         print(joint_angles)
