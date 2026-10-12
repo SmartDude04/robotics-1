@@ -8,20 +8,29 @@ from forward_kinematics import forward_kinematics
 def main() -> None:
     dofbot = Dofbot()
     
-    move_joint_angles = np.zeros(shape=(6, 1))
-    move_joint_angles[:, 0] = [90, 90, 90, 90, 90, 90]
-    dofbot.move_joints(move_joint_angles, 1000)
+    move_joint_angles = np.zeros(shape=(6, 5))
+    move_joint_angles[:, 0] = [2, 62, 16, 75, 90, 90]
+    move_joint_angles[:, 1] = [44, 37, 41, 118, 90, 90]
+    move_joint_angles[:, 2] = [54, 70, 39, 105, 90, 90]
+    move_joint_angles[:, 3] = [57, 34, 26, 112, 121, 90]
+    move_joint_angles[:, 4] = [49, 75, 23, 27, 121, 90]
     
-    while True:
-        joint_angles = dofbot.get_joint_angles()
-        print(joint_angles)
+    for joint_angles_column_vector in move_joint_angles.T:
+        dofbot.move_joints(joint_angles_column_vector, 1000)
+        time.sleep(0.5)
         
-        # end_effector_rotation, end_effector_translation = forward_kinematics(joint_angles)
-        # print(f"Rotation: {end_effector_rotation.as_matrix()}")
-        # print(f"Translation: {end_effector_translation}")
+        measured_joint_angles_column_vector = dofbot.get_joint_angles()
+        rotation_matrix, translation_column_vector = forward_kinematics(measured_joint_angles_column_vector)
         
-        time.sleep(1.0)
+        print("Rotation matrix:")
+        print(rotation_matrix)
         
+        print("\nTranslation column vector:")
+        print(translation_column_vector)
+        
+        input("\nPress Enter when ready to move to the next point")
+    
+    print("Finished...")
     
 
 if __name__ == "__main__":
