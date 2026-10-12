@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.spatial.transform import Rotation
 
-def forward_kinematics(joint_angles_column_vector: np.ndarray) -> tuple[Rotation, np.ndarray]:
+def forward_kinematics(joint_angles_column_vector):
     """
     Computes the end effector position and orientation relative to the base frame for Yahboom's Dofbot manipulator
     using the product of exponentials approach
@@ -52,7 +52,7 @@ def forward_kinematics(joint_angles_column_vector: np.ndarray) -> tuple[Rotation
 
     return r_0t, p_0t
 
-def rotx(theta: float) -> Rotation:
+def rotx(theta):
     """
     :param theta: Degrees to rotate
     :return: the principal axis rotation matrix for a rotation about the x-axis by theta degrees
@@ -61,7 +61,7 @@ def rotx(theta: float) -> Rotation:
     r_x = Rotation.from_euler("x", theta, degrees=True)
     return r_x
 
-def roty(theta: float) -> Rotation:
+def roty(theta):
     """
     :param theta: Degrees to rotate
     :return: the principal axis rotation matrix for a rotation about the y-axis by theta degrees
@@ -70,7 +70,7 @@ def roty(theta: float) -> Rotation:
     r_y = Rotation.from_euler("y", theta, degrees=True)
     return r_y
 
-def rotz(theta: float) -> Rotation:
+def rotz(theta):
     """
     :param theta: Degrees to rotate
     :return: the principal axis rotation matrix for a rotation about the z-axis by theta degrees
