@@ -8,6 +8,7 @@ def main() -> None:
     
     while True:
         joint_angles = dofbot.get_joint_angles()
+        print(joint_angles)
         end_effector_rotation, end_effector_translation = forward_kinematics(joint_angles)
         
         print(end_effector_rotation.as_matrix())
