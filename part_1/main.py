@@ -11,8 +11,8 @@ def main() -> None:
         print(joint_angles)
         end_effector_rotation, end_effector_translation = forward_kinematics(joint_angles)
         
-        print(end_effector_rotation.as_matrix())
-        print(end_effector_translation)
+        print(f"Rotation: {end_effector_rotation.as_matrix()}")
+        print(f"Translation: {end_effector_translation}")
         
         time.sleep(1.0)
         
