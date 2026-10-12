@@ -1,11 +1,10 @@
 [project]
 name = "robotics-1"
 version = "0.1.0"
-requires-python = ">=3.14"
+requires-python = "==3.8.20"
 dependencies = [
-    "arm-lib>=1.0.0",
-    "matplotlib>=3.11.2",
-    "numpy>=2.5.4",
-    "scipy>=1.18.1",
-    "scipy-stubs~=1.18.1",
+    "arm-lib",
+    "matplotlib",
+    "numpy",
+    "scipy",
 ]
