@@ -27,11 +27,11 @@ def forward_kinematics(joint_angles_column_vector):
     l_5 = 0.05457 # servo 5 to gripper
 
     #set up the rotation matrices between subsequent frames
-    r_01 = rotz(joint_angles_column_vector[0]) # rotation between base frame and 1 frame
-    r_12 = roty(-joint_angles_column_vector[1]) # rotation between 1 and 2 frames
-    r_23 = roty(-joint_angles_column_vector[2]) # rotation between 2 and 3 frames
-    r_34 = roty(-joint_angles_column_vector[3]) # rotation between 3 and 4 frames
-    r_45 = rotx(-joint_angles_column_vector[4]) # rotation between 4 and 5 frames
+    r_01 = rotz(joint_angles_column_vector[0, 0]) # rotation between base frame and 1 frame
+    r_12 = roty(-joint_angles_column_vector[1, 0]) # rotation between 1 and 2 frames
+    r_23 = roty(-joint_angles_column_vector[2, 0]) # rotation between 2 and 3 frames
+    r_34 = roty(-joint_angles_column_vector[3, 0]) # rotation between 3 and 4 frames
+    r_45 = rotx(-joint_angles_column_vector[4, 0]) # rotation between 4 and 5 frames
     r_5t = roty(0.0) #the tool frame is defined to be the same as frame 5
 
     #set up the position vectors between subsequent frames
