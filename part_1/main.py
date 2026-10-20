@@ -24,6 +24,7 @@ def main() -> None:
         
         print("Rotation matrix:")
         print(rotation_matrix.as_euler("XYZ"))
+        print(rotation_matrix.as_euler("XYZ"), degrees=True)
         
         print("\nTranslation column vector:")
         print(translation_column_vector)
