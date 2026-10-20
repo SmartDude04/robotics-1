@@ -34,6 +34,7 @@ def main() -> None:
         
         input("Move to IK solution")
         ik_joint_angles = np.vstack((ik_joint_angles, [[90.0]]))
+        print(f"IK Joint angles: {ik_joint_angles}")
         dofbot.move_joints(ik_joint_angles, 1000)
         
         if i != move_joint_angles.shape[1] - 1:
