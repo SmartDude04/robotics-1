@@ -33,8 +33,7 @@ def main() -> None:
         ik_joint_angles = inverse_kinematics(np.atleast_2d([0.0, 0.0, 0.0, 0.0, 0.0, 0.0]).T, np.atleast_2d(translation_column_vector).T, rotation_matrix)
         
         input("Move to IK solution")
-        ik_joint_angles.reshape(shape=(6,1))
-        ik_joint_angles[5, 0] = 90
+        ik_joint_angles = np.vstack((ik_joint_angles, [[90.0]]))
         dofbot.move_joints(ik_joint_angles, 1000)
         
         if i != move_joint_angles.shape[1] - 1:
