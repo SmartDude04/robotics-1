@@ -1,5 +1,6 @@
 import numpy as np
 from scipy.spatial.transform import Rotation
+import time
 
 from part_1.dofbot_comms import Dofbot
 from part_1.forward_kinematics import forward_kinematics
@@ -31,8 +32,13 @@ def main():
         
         dofbot.move_joints(desired_joint_angles, 1000)
         
+        time.sleep(0.5)
+        forward_kinematics_current_rotation, forward_kinematics_current_translation = forward_kinematics(dofbot.get_joint_angles())
+        print(f"FK rotation: {forward_kinematics_current_rotation.as_matrix()}")
+        print(f"FK translation: {forward_kinematics_current_translation}")
+        
         if i != 4:
-            input("Press enter to move to the next joint position")
+            input("Press Enter to move to the next joint position")
     
     
 if __name__ == "__main__":
