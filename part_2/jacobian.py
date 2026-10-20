@@ -1,5 +1,4 @@
 import numpy as np
-from scipy.spatial.transform import Rotation
 
 from part_2.partial_forward_kinematics import partial_forward_kinematics
 

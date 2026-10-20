@@ -2,8 +2,8 @@ import time
 
 import numpy as np
 
-from dofbot_comms import Dofbot
-from forward_kinematics import forward_kinematics
+from part_1.dofbot_comms import Dofbot
+from part_1.forward_kinematics import forward_kinematics
 
 def main() -> None:
     dofbot = Dofbot()
