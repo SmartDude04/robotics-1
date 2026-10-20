@@ -10,10 +10,10 @@ def main() -> None:
     
     move_joint_angles = np.zeros(shape=(6, 5))
     move_joint_angles[:, 0] = [2, 62, 16, 75, 90, 90]
-    move_joint_angles[:, 0] = [2, 40, 71, 26, 90, 90]
-    move_joint_angles[:, 1] = [44, 37, 41, 118, 90, 90]
-    move_joint_angles[:, 2] = [54, 70, 39, 105, 90, 90]
-    move_joint_angles[:, 3] = [57, 34, 26, 112, 121, 90]
+    move_joint_angles[:, 1] = [2, 40, 71, 26, 90, 90]
+    move_joint_angles[:, 2] = [44, 37, 41, 118, 90, 90]
+    move_joint_angles[:, 3] = [54, 70, 39, 105, 90, 90]
+    move_joint_angles[:, 4] = [57, 34, 26, 112, 121, 90]
     move_joint_angles[:, 4] = [49, 75, 23, 27, 121, 90]
     
     for i in range(move_joint_angles.shape[1]):
