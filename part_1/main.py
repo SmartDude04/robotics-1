@@ -30,7 +30,7 @@ def main() -> None:
         print("\nTranslation column vector:")
         print(translation_column_vector)
         
-        ik_joint_angles = inverse_kinematics(np.atleast_2d([0.0, 0.0, 0.0, 0.0, 0.0, 0.0]).T, np.atleast_2d(translation_column_vector).T, rotation_matrix)
+        ik_joint_angles = inverse_kinematics(move_joint_angles[:, max(i - 1, 0):max(i, 1)], np.atleast_2d(translation_column_vector).T, rotation_matrix)
         
         input("Move to IK solution")
         ik_joint_angles = np.vstack((ik_joint_angles, [[90.0]]))
