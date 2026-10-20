@@ -15,6 +15,6 @@ def move_angles_to_bounds(joint_angles_column_vector: np.ndarray) -> np.ndarray:
             while new_angle >= 270:
                 new_angle -= 360
 
-        new_angles[i, 0] = new_angles
+        new_angles[i, 0] = new_angle
     
     return new_angles
