@@ -23,7 +23,7 @@ def main() -> None:
         rotation_matrix, translation_column_vector = forward_kinematics(measured_joint_angles_column_vector)
         
         print("Rotation matrix:")
-        print(rotation_matrix.as_euler("xyz"))
+        print(rotation_matrix.as_matrix())
         
         print("\nTranslation column vector:")
         print(translation_column_vector)
