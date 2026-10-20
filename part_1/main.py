@@ -30,13 +30,6 @@ def main() -> None:
         print("\nTranslation column vector:")
         print(translation_column_vector)
         
-        ik_joint_angles = inverse_kinematics(move_joint_angles[:, max(i - 1, 0):max(i, 1)], np.atleast_2d(translation_column_vector).T, rotation_matrix)
-        
-        input("Move to IK solution")
-        ik_joint_angles = np.vstack((ik_joint_angles, [[90.0]]))
-        print(f"IK Joint angles: {ik_joint_angles}")
-        dofbot.move_joints(ik_joint_angles, 1000)
-        
         if i != move_joint_angles.shape[1] - 1:
             input("\nPress Enter when ready to move to the next point")
     
