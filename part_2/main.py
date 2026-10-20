@@ -27,6 +27,7 @@ def main():
         
         current_joint_angles = dofbot.get_joint_angles()
         desired_joint_angles = inverse_kinematics(current_joint_angles, cur_position, cur_rotation)
+        desired_joint_angles = np.vstack((desired_joint_angles, [[90.0]]))
         
         dofbot.move_joints(desired_joint_angles, 1000)
         
