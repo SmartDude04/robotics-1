@@ -34,7 +34,7 @@ def main():
         
         time.sleep(0.5)
         forward_kinematics_current_rotation, forward_kinematics_current_translation = forward_kinematics(dofbot.get_joint_angles())
-        print(f"FK rotation: {forward_kinematics_current_rotation.as_matrix()}")
+        print(f"FK rotation: {forward_kinematics_current_rotation.as_euler("xyz")}")
         print(f"FK translation: {forward_kinematics_current_translation}")
         
         if i != 4:
