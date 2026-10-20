@@ -3,6 +3,7 @@ import numpy as np
 from part_1.forward_kinematics import forward_kinematics
 from part_2.errors import position_error, rotation_error, cost, position_weight, rotation_weight
 from part_2.jacobian import jacobian
+from part_2.move_angles_to_bounds import move_angles_to_bounds
 
 epsilon = 0.000001
 step_amount = 0.2
@@ -58,4 +59,4 @@ def inverse_kinematics(current_joint_angles_column_vector, desired_pose, desired
         
         i += 1
         
-    return iterative_joint_angles
+    return move_angles_to_bounds(iterative_joint_angles)

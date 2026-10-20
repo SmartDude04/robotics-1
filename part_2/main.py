@@ -7,13 +7,12 @@ from part_2.inverse_kinematics import inverse_kinematics
 
 def main():
     current_joint_angles = np.atleast_2d([0.0, 0.0, 0.0, 0.0, 0.0, 0.0]).T
-    print(forward_kinematics(current_joint_angles))
-    desired_pose = np.atleast_2d([0.1, 0, 0.02]).T
-    desired_rotation = Rotation.identity()
+    desired_pose = np.atleast_2d([0.23421554, 0.00817899, 0.10212526]).T
+    desired_rotation = Rotation.from_euler("xyz", [1.57079633, -0.4712389, -3.10668607])
     
     new_joint_angles = inverse_kinematics(current_joint_angles, desired_pose, desired_rotation)
-    new_fk = forward_kinematics(new_joint_angles)
-    print(new_fk[0].as_matrix(), new_fk[1])
+    print(new_joint_angles)
+    print(forward_kinematics(new_joint_angles))
     
 if __name__ == "__main__":
     main()
