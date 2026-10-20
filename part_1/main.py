@@ -4,16 +4,17 @@ import numpy as np
 
 from part_1.dofbot_comms import Dofbot
 from part_1.forward_kinematics import forward_kinematics
+from part_2.inverse_kinematics import inverse_kinematics
+
 
 def main() -> None:
     dofbot = Dofbot()
     
     move_joint_angles = np.zeros(shape=(6, 5))
     move_joint_angles[:, 0] = [2, 62, 16, 75, 90, 90]
-    move_joint_angles[:, 1] = [2, 40, 71, 26, 90, 90]
-    move_joint_angles[:, 2] = [44, 37, 41, 118, 90, 90]
-    move_joint_angles[:, 3] = [54, 70, 39, 105, 90, 90]
-    move_joint_angles[:, 4] = [57, 34, 26, 112, 121, 90]
+    move_joint_angles[:, 1] = [44, 37, 41, 118, 90, 90]
+    move_joint_angles[:, 2] = [54, 70, 39, 105, 90, 90]
+    move_joint_angles[:, 3] = [57, 34, 26, 112, 121, 90]
     move_joint_angles[:, 4] = [49, 75, 23, 27, 121, 90]
     
     for i in range(move_joint_angles.shape[1]):
@@ -28,6 +29,12 @@ def main() -> None:
         
         print("\nTranslation column vector:")
         print(translation_column_vector)
+        
+        ik_joint_angles = inverse_kinematics(np.atleast_2d([0.0, 0.0, 0.0, 0.0, 0.0, 0.0]).T, translation_column_vector, rotation_matrix)
+        
+        input("Move to IK solution")
+        
+        dofbot.move_joints(ik_joint_angles, 1000)
         
         if i != move_joint_angles.shape[1] - 1:
             input("\nPress Enter when ready to move to the next point")
