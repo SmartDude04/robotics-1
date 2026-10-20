@@ -12,7 +12,7 @@ class Dofbot:
         joints = np.zeros(shape=(6,1), dtype=np.float64)
         
         for i in range(1, 7):
-            joints[i - 1] = self.arm.Arm_serial_servo_read(i)
+            joints[i - 1, 0] = self.arm.Arm_serial_servo_read(i)
         
         return joints
     
