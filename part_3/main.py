@@ -31,6 +31,7 @@ def main() -> None:
         current_joint_angles = dofbot.get_joint_angles()
         desired_joint_angles = inverse_kinematics(current_joint_angles, cur_position, cur_rotation)
         desired_joint_angles = np.vstack((desired_joint_angles, [[90.0]]))
+        print(f"Moving to {desired_joint_angles}")
         dofbot.move_joints(desired_joint_angles, 1000)
         
         input("Enter when ready to move along the path")
