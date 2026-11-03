@@ -40,6 +40,9 @@ def main() -> None:
         
         for joint_angles in joint_space_path:
             dofbot.move_joints(joint_angles, 50)
+            joints = dofbot.get_joint_angles()
+            print(f"Actual joint configuration: {joints.T}")
+            print(f"Desired joint configuration: {joint_angles}")
             
         input("Move to next point")
         
