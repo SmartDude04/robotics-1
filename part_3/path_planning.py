@@ -27,7 +27,6 @@ def path_planning(initial_joint_configuration: npt.NDArray[np.float64], position
     
     for position in position_path:
         assert position.shape == (3, 1)
-    print(initial_joint_configuration)
     assert initial_joint_configuration.shape == (5, 1)
     for num in initial_joint_configuration:
         assert num != np.nan
@@ -46,6 +45,7 @@ def path_planning(initial_joint_configuration: npt.NDArray[np.float64], position
     
     for i, (current_desired_position, current_desired_rotation) in enumerate(zip(position_path[:-1], rotation_path[:-1])):
         current_rotation, current_position = forward_kinematics(joint_space_path[-1])
+        current_position = np.atleast_2d(current_position).T
         target_position, target_rotation = np.copy(position_path[i + 1]), rotation_path[i + 1]
         
         position_derivative = path_direction(current_position, target_position, np.float64(1.0 / num_steps))
