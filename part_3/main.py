@@ -43,7 +43,7 @@ def main() -> None:
         print(joint_space_path)
         input("TTT")
         for joint_angles in joint_space_path:
-            dofbot.move_joints(joint_angles, 250)
+            dofbot.move_joints(joint_angles, 50)
             
         input("Move to next point")
         
