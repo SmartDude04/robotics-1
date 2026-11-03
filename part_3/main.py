@@ -1,3 +1,5 @@
+import time
+
 import numpy as np
 from scipy.spatial.transform import Rotation
 
@@ -43,6 +45,7 @@ def main() -> None:
             joints = dofbot.get_joint_angles()
             print(f"Actual joint configuration: {joints.T}")
             print(f"Desired joint configuration: {joint_angles.T}")
+            time.sleep(0.1)
             
         input("Move to next point")
         
