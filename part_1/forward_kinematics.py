@@ -7,7 +7,7 @@ def forward_kinematics(joint_angles_column_vector):
     using the product of exponentials approach
     
     :param joint_angles_column_vector: 5x1 vector of joint angles in degrees
-    :return: The 3x3 rotation matrix describing the relative orientation of the end effector frame to the base frame
+    :return: The Rotation object describing the relative orientation of the end effector frame to the base frame
     (r_ {0t}) and the 3x1 vector describing the position of the end effector relative to the base, where the first
     element is the position along the base frame x-axis, the second element is the position along the base frame
     y-axis, and the third element is the position along the base frame z-axis (p_ {0t})
