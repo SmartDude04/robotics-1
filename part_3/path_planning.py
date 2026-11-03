@@ -27,6 +27,7 @@ def path_planning(initial_joint_configuration: npt.NDArray[np.float64], position
     
     for position in position_path:
         assert position.shape == (3, 1)
+    print(initial_joint_configuration)
     assert initial_joint_configuration.shape == (5, 1)
     for num in initial_joint_configuration:
         assert num != np.nan
