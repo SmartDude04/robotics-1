@@ -37,7 +37,9 @@ def main() -> None:
         
         position_path, rotation_path = generate_cartesian_path(cur_position, next_position, cur_rotation, next_rotation, 20)
         joint_space_path = path_planning(dofbot.get_joint_angles()[:5,:], position_path, rotation_path)
-        print(joint_space_path)
+        
+        for joint_angles in joint_space_path:
+            dofbot.move_joints(joint_angles, 100)
         
 
 if __name__ == "__main__":
