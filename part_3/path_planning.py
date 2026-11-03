@@ -9,10 +9,9 @@ from part_2.jacobian import jacobian
 from part_3.path_derivatives import path_direction, rotation_direction
 
 damping = 1e-4
-q_min = np.array([0, 0, 0, 0, 0])
-q_max = np.array([np.pi, np.pi, np.pi, np.pi, 3 * np.pi / 2])
-dq_min = np.array([-0.02, -0.02, -0.02, -0.02, -0.02])
-dq_max = np.array([0.02,  0.02,  0.02,  0.02,  0.02])
+q_min = np.array([0, 0, 0, 0, 0], dtype=np.float64)
+q_max = np.array([180, 180, 180, 180, 270], dtype=np.float64)
+dq_max = np.full(5, 2.0)
 
 
 def path_planning(initial_joint_configuration: npt.NDArray[np.float64], position_path: list[npt.NDArray[np.float64]], rotation_path: list[Rotation]) -> list[npt.NDArray[np.float64]]:
@@ -61,8 +60,8 @@ def path_planning(initial_joint_configuration: npt.NDArray[np.float64], position
         q = -2 * J.T @ np.vstack((rotation_derivative, position_derivative))
 
         angles = joint_space_path[-1].ravel()
-        lower_bound = np.maximum(q_min - joint_space_path[-1], -dq_max)
-        upper_bound = np.minimum(q_max - joint_space_path[-1], dq_max)
+        lower_bound = np.maximum(q_min - angles, -dq_max)
+        upper_bound = np.minimum(q_max - angles, dq_max)
         
         solver = osqp.OSQP()
         
@@ -83,7 +82,7 @@ def path_planning(initial_joint_configuration: npt.NDArray[np.float64], position
             )
         
         joint_space_delta = result.x.reshape(5, 1)
-        next_joint_space_vector = joint_space_path[-1] + joint_space_delta / num_steps
+        next_joint_space_vector = joint_space_path[-1] + joint_space_delta
         joint_space_path.append(next_joint_space_vector)
     
     # Add EE grasp amount
