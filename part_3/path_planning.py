@@ -70,8 +70,7 @@ def path_planning(initial_joint_configuration: npt.NDArray[np.float64], position
             q=q.flatten(),
             A=A,
             l=lower_bound,
-            u=upper_bound,
-            verbose=True
+            u=upper_bound
         )
         
         result = solver.solve()
