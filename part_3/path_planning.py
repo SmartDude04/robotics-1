@@ -85,5 +85,9 @@ def path_planning(initial_joint_configuration: npt.NDArray[np.float64], position
         next_joint_space_vector = joint_space_path[-1] + joint_space_delta / num_steps
         joint_space_path.append(next_joint_space_vector)
     
+    # Add EE grasp amount
+    for i in range(len(joint_space_path)):
+        joint_space_path[i] = np.vstack((joint_space_path[i], [[90.0]]))
+    
     return joint_space_path
         
