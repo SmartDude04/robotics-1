@@ -48,10 +48,10 @@ def path_planning(initial_joint_configuration: npt.NDArray[np.float64], position
         current_position = np.atleast_2d(current_position).T
         target_position, target_rotation = np.copy(position_path[i + 1]), rotation_path[i + 1]
         
-        position_derivative = path_direction(current_position, target_position, np.float64(1.0 / num_steps))
-        rotation_derivative = rotation_direction(current_rotation, target_rotation, np.float64(1.0 / num_steps))
+        position_derivative = path_direction(current_position, target_position, np.float64(1.0))
+        rotation_derivative = rotation_direction(current_rotation, target_rotation, np.float64(1.0))
         
-        J = jacobian(joint_space_path[-1])
+        J = jacobian(joint_space_path[-1]) * (np.pi / 180.0)
         
         H = 2 * (J.T @ J + damping * np.eye(5))
         P = sparse.triu(
@@ -60,6 +60,7 @@ def path_planning(initial_joint_configuration: npt.NDArray[np.float64], position
         )
         q = -2 * J.T @ np.vstack((rotation_derivative, position_derivative))
 
+        angles = joint_space_path[-1].ravel()
         lower_bound = np.maximum(q_min - joint_space_path[-1], -dq_max)
         upper_bound = np.minimum(q_max - joint_space_path[-1], dq_max)
         
