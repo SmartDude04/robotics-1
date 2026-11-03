@@ -36,7 +36,7 @@ def main() -> None:
         
         input("Enter when ready to move along the path")
         
-        position_path, rotation_path = generate_cartesian_path(cur_position, next_position, cur_rotation, next_rotation, 20)
+        position_path, rotation_path = generate_cartesian_path(cur_position, next_position, cur_rotation, next_rotation, 50)
         print(position_path)
         joint_space_path = path_planning(dofbot.get_joint_angles()[:5,:], position_path, rotation_path)
         
