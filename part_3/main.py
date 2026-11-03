@@ -4,6 +4,7 @@ import numpy as np
 from scipy.spatial.transform import Rotation
 
 from part_1.dofbot_comms import Dofbot
+from part_1.forward_kinematics import forward_kinematics
 from part_2.inverse_kinematics import inverse_kinematics
 from part_3.generate_cartesian_path import generate_cartesian_path
 from part_3.path_planning import path_planning
@@ -40,12 +41,17 @@ def main() -> None:
         position_path, rotation_path = generate_cartesian_path(cur_position, next_position, cur_rotation, next_rotation, 50)
         joint_space_path = path_planning(dofbot.get_joint_angles()[:5,:], position_path, rotation_path)
         
-        for joint_angles in joint_space_path:
+        for joint_angles, task_position, task_rotation in zip(joint_space_path, position_path, rotation_path):
             dofbot.move_joints(joint_angles, 50)
             joints = dofbot.get_joint_angles()
             print(f"Actual joint configuration: {joints.T}")
             print(f"Desired joint configuration: {joint_angles.T}")
-            time.sleep(0.1)
+            
+            rotation, position = forward_kinematics(joints)
+            print(f"Actual position: {position.T}")
+            print(f"Desired position: {task_position.T}")
+            print(f"Actual rotation (xyz): {rotation.as_euler("xyz")}")
+            print(f"Desired rotation (xyz): {task_rotation.as_euler("xyz")}")
             
         input("Move to next point")
         
