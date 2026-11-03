@@ -39,7 +39,9 @@ def main() -> None:
         joint_space_path = path_planning(dofbot.get_joint_angles()[:5,:], position_path, rotation_path)
         
         for joint_angles in joint_space_path:
-            dofbot.move_joints(joint_angles, 100)
+            dofbot.move_joints(joint_angles, 250)
+            
+        input("Move to next point")
         
 
 if __name__ == "__main__":
