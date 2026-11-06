@@ -42,7 +42,7 @@ def path_planning(initial_joint_configuration: npt.NDArray[np.float64], position
     
     A = sparse.eye(5, format="csc")
     
-    for i in len(position_path) - 1:
+    for i in range(len(position_path) - 1):
         current_rotation, current_position = forward_kinematics(joint_space_path[-1])
         current_position = np.atleast_2d(current_position).T
         target_position, target_rotation = np.copy(position_path[i + 1]), rotation_path[i + 1]
