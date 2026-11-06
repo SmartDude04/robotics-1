@@ -30,9 +30,7 @@ def path_planning(initial_joint_configuration: npt.NDArray[np.float64], position
     for num in initial_joint_configuration:
         assert num != np.nan
     assert len(position_path) == len(rotation_path)
-    
-    num_steps = len(position_path)
-    
+        
     joint_space_path = [np.copy(initial_joint_configuration)]
     
     # OSQP Solver:
