@@ -43,7 +43,6 @@ def main() -> None:
 
         for joint_angles, task_position, task_rotation in zip(joint_space_path, position_path, rotation_path):
             dofbot.move_joints(joint_angles, 50)
-            time.sleep(0.01)
             joints = dofbot.get_joint_angles()
             print(f"Actual joint configuration: {joints.T}")
             print(f"Desired joint configuration: {joint_angles.T}")

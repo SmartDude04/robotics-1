@@ -24,7 +24,6 @@ class Dofbot:
                 time.sleep(0.001)
             
             joints[i - 1, 0] = joint
-            time.sleep(0.001)
         
         return joints
     
