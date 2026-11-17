@@ -46,7 +46,7 @@ def main() -> None:
                 measured_joint_angles = dofbot.get_joint_angles()
                 joint_commands = np.zeros(shape=(6,1))
                 for j in range(6):
-                    joint_commands[j, 0] = joint_pid[j].control(measured_joint_angles[j], joint_angles[j])
+                    joint_commands[j, 0] = joint_pid[j].control(measured_joint_angles[j, 0], joint_angles[j, 0])
                     
                 # Move the joint command
                 dofbot.move_joints(joint_commands, 10)
