@@ -52,6 +52,7 @@ def main() -> None:
                     joint_commands[j, 0] = measured_joint_angles[j, 0] + 0.01 * res
                     
                 # Move the joint command
+                print(f"joint command: {joint_commands.T}")
                 dofbot.move_joints(joint_commands, 10)
                 
 
