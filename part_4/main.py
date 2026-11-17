@@ -1,17 +1,16 @@
-import time
-
 import numpy as np
 from scipy.spatial.transform import Rotation
 
 from part_1.dofbot_comms import Dofbot
-from part_1.forward_kinematics import forward_kinematics
 from part_2.inverse_kinematics import inverse_kinematics
 from part_3.generate_cartesian_path import generate_cartesian_path
 from part_3.path_planning import path_planning
+from part_4.pid import Pid
 
 
 def main() -> None:
     dofbot = Dofbot()
+    joint_pid = [Pid(2, 40, 0.1, 0.01) for _ in range(6)]
     move_end_effector_poses = np.zeros(shape=(3,5,2))
 
     move_end_effector_poses[:, 0, 0] = [0.23273228, 0.00812719, 0.09465976]
@@ -42,16 +41,16 @@ def main() -> None:
         joint_space_path = path_planning(dofbot.get_joint_angles()[:5,:], position_path, rotation_path)
 
         for joint_angles, task_position, task_rotation in zip(joint_space_path, position_path, rotation_path):
-            dofbot.move_joints(joint_angles, 50)
-            joints = dofbot.get_joint_angles()
-            print(f"Actual joint configuration: {joints.T}")
-            print(f"Desired joint configuration: {joint_angles.T}")
-
-            rotation, position = forward_kinematics(joints)
-            print(f"Actual position: {position.T}")
-            print(f"Desired position: {task_position.T}")
-            print(f"Actual rotation (xyz): {rotation.as_euler("xyz")}")
-            print(f"Desired rotation (xyz): {task_rotation.as_euler("xyz")}")
+            # 100ms period to adjust to the position; 10 PID calls
+            for _ in range(10):
+                measured_joint_angles = dofbot.get_joint_angles()
+                joint_commands = np.zeros(shape=(6,1))
+                for j in range(6):
+                    joint_commands[j, 0] = (joint_pid[j].control(measured_joint_angles[j], joint_angles[j]))
+                    
+                # Move the joint command
+                dofbot.move_joints(joint_commands, 10)
+                
 
         input("Move to next point")
 
