@@ -10,7 +10,7 @@ from part_4.pid import Pid
 
 def main() -> None:
     dofbot = Dofbot()
-    joint_pid = [Pid(1.6, 1, 0) for _ in range(6)]
+    joint_pid = [Pid(1.5, 0, 0) for _ in range(6)]
     move_end_effector_poses = np.zeros(shape=(3,5,2))
 
     move_end_effector_poses[:, 0, 0] = [0.23273228, 0.00812719, 0.09465976]
