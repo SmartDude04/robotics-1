@@ -40,6 +40,7 @@ def main() -> None:
         position_path, rotation_path = generate_cartesian_path(cur_position, next_position, cur_rotation, next_rotation, 50)
         joint_space_path = path_planning(dofbot.get_joint_angles()[:5,:], position_path, rotation_path)
 
+        print("command1, command2, command3, command4, command5, error1, error2, error3, error4, error5")
         for joint_angles, task_position, task_rotation in zip(joint_space_path, position_path, rotation_path):
             for _ in range(5):
                 measured_joint_angles = dofbot.get_joint_angles()
@@ -51,9 +52,11 @@ def main() -> None:
                     joint_commands[j, 0] = measured_joint_angles[j, 0] + res
                     
                 # Move the joint command
-                print(f"joint command: {joint_commands.T}")
-                print(f"error: {(measured_joint_angles - joint_angles).T}")
                 dofbot.move_joints(joint_commands, 3)
+                
+                # Log
+                print(f"{[joint_command for joint_command in joint_commands[:, 0]]}", end="")
+                print(f"{[error for error in (measured_joint_angles - joint_angles)[:, 0]]}")
                 
 
         input("Move to next point")
