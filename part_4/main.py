@@ -46,7 +46,8 @@ def main() -> None:
                 measured_joint_angles = dofbot.get_joint_angles()
                 joint_commands = np.zeros(shape=(6,1))
                 for j in range(6):
-                    joint_commands[j, 0] = joint_pid[j].control(measured_joint_angles[j, 0], joint_angles[j, 0])
+                    # PID controller returns an angular rate, so it should be added onto the already-existing joint angles, multiplied by the timestep
+                    joint_commands[j, 0] = measured_joint_angles[j, 0] + 0.01 * joint_pid[j].control(measured_joint_angles[j, 0], joint_angles[j, 0])
                     
                 # Move the joint command
                 dofbot.move_joints(joint_commands, 10)
