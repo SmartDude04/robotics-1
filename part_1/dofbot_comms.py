@@ -1,4 +1,5 @@
 import time
+from math import isnan
 
 from Arm_Lib import Arm_Device
 import numpy as np
@@ -12,7 +13,17 @@ class Dofbot:
         joints = np.zeros(shape=(6,1), dtype=np.float64)
         
         for i in range(1, 7):
-            joints[i - 1, 0] = self.arm.Arm_serial_servo_read(i)
+            joint = self.arm.Arm_serial_servo_read(i)
+            
+            # Try a total of 10 times to get the joint value
+            # This is because the joints frequently return NaN
+            for j in range(9):
+                if not isnan(joint):
+                    break
+                joint = self.arm.Arm_serial_servo_read(i)
+                time.sleep(0.001)
+            
+            joints[i - 1, 0] = joint
             time.sleep(0.001)
         
         return joints
