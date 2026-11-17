@@ -1,9 +1,8 @@
 class Pid:
-    def __init__(self, kp: float | int, kd: float | int, ki: float | int, timestep_seconds: float | int):
+    def __init__(self, kp: float | int, kd: float | int, ki: float | int):
         self.kp = kp
         self.kd = kd
         self.ki = ki
-        self.timestep_seconds = timestep_seconds
         
         self.prev_error: float | int | None = None
         self.integral = 0.0
@@ -14,8 +13,8 @@ class Pid:
         if self.prev_error is None:
             current_error_derivative = 0
         else:
-            current_error_derivative = (current_error - self.prev_error) / self.timestep_seconds
-        self.integral += current_error * self.timestep_seconds
+            current_error_derivative = (current_error - self.prev_error)
+        self.integral += current_error
         current_error_integral = self.integral
         
         self.prev_error = current_error
