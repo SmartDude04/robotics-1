@@ -5,13 +5,16 @@ class Pid:
         self.ki = ki
         self.timestep_seconds = timestep_seconds
         
-        self.prev_error = 0.0
+        self.prev_error: float | int | None = None
         self.integral = 0.0
     
     def control(self, measured_state: float | int, desired_state: float | int) -> float | int:
         # Calculate P, I, and D values for this measurement (given history)
         current_error = desired_state - measured_state
-        current_error_derivative = (current_error - self.prev_error) / self.timestep_seconds
+        if self.prev_error is None:
+            current_error_derivative = 0
+        else:
+            current_error_derivative = (current_error - self.prev_error) / self.timestep_seconds
         self.integral += current_error * self.timestep_seconds
         current_error_integral = self.integral
         
