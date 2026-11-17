@@ -41,8 +41,7 @@ def main() -> None:
         joint_space_path = path_planning(dofbot.get_joint_angles()[:5,:], position_path, rotation_path)
 
         for joint_angles, task_position, task_rotation in zip(joint_space_path, position_path, rotation_path):
-            # 100ms period to adjust to the position; 10 PID calls
-            for _ in range(10):
+            for _ in range(5):
                 measured_joint_angles = dofbot.get_joint_angles()
                 joint_commands = np.zeros(shape=(6,1))
                 for j in range(6):
@@ -53,7 +52,7 @@ def main() -> None:
                     
                 # Move the joint command
                 print(f"joint command: {joint_commands.T}")
-                dofbot.move_joints(joint_commands, 10)
+                dofbot.move_joints(joint_commands, 3)
                 
 
         input("Move to next point")
