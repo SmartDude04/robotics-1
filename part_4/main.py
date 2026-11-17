@@ -56,9 +56,9 @@ def main() -> None:
                 
                 # Log
                 for item in [str(float(joint_command)) for joint_command in joint_commands[:, 0]]:
-                    print(item, end=" ")
+                    print(item, end=", ")
                 for item in [str(float(error)) for error in (measured_joint_angles - joint_angles)[:, 0]]:
-                    print(item, end=" ")
+                    print(item, end=", ")
                 print()
                 
 
