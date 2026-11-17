@@ -13,6 +13,7 @@ class Dofbot:
         
         for i in range(1, 7):
             joints[i - 1, 0] = self.arm.Arm_serial_servo_read(i)
+            time.sleep(0.001)
         
         return joints
     
