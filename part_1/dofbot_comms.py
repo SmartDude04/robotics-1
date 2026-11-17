@@ -18,7 +18,7 @@ class Dofbot:
             # Try a total of 10 times to get the joint value
             # This is because the joints frequently return NaN
             for j in range(9):
-                if not isnan(joint):
+                if not joint is None:
                     break
                 joint = self.arm.Arm_serial_servo_read(i)
                 time.sleep(0.001)
