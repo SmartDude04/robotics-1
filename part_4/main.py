@@ -52,6 +52,7 @@ def main() -> None:
                     
                 # Move the joint command
                 print(f"joint command: {joint_commands.T}")
+                print(f"error: {(measured_joint_angles - joint_angles).T}")
                 dofbot.move_joints(joint_commands, 3)
                 
 
