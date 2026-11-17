@@ -47,7 +47,7 @@ def main() -> None:
                 joint_commands = np.zeros(shape=(6,1))
                 for j in range(6):
                     res = joint_pid[j].control(measured_joint_angles[j, 0], joint_angles[j, 0])
-                    print(f"PID controller for joint {j} returns {res}")
+                    
                     # PID controller returns an angular rate, so it should be added onto the already-existing joint angles, multiplied by the timestep
                     joint_commands[j, 0] = measured_joint_angles[j, 0] + res
                     
