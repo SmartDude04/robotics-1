@@ -55,8 +55,11 @@ def main() -> None:
                 dofbot.move_joints(joint_commands, 3)
                 
                 # Log
-                print(f"{[str(float(joint_command)) for joint_command in joint_commands[:, 0]]}", end="")
-                print(f"{[str(float(error)) for error in (measured_joint_angles - joint_angles)[:, 0]]}")
+                for item in [str(float(joint_command)) for joint_command in joint_commands[:, 0]]:
+                    print(item, end=" ")
+                for item in [str(float(error)) for error in (measured_joint_angles - joint_angles)[:, 0]]:
+                    print(item, end=" ")
+                print()
                 
 
         input("Move to next point")
